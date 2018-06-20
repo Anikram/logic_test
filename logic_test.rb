@@ -17,7 +17,7 @@ test = TestBuilder.load_test_from_file("data/logic_test.yml")
 
 12.times do |i|
   i += 1
-  test[i].read_question
+  puts test[i].read_question
   puts "Ваш ответ:"
   input = get_user_input
   if test[i].check(input)

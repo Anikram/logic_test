@@ -4,7 +4,7 @@ require_relative '../test_builder.rb'
 describe '#load_test_from_file' do
 
   before(:all) {
-    @test = TestBuilder.load_test_from_file("path")
+    @test = TestBuilder.load_test_from_file("data/logic_test.yml")
   }
 
   it 'should return an test hash' do
@@ -12,7 +12,6 @@ describe '#load_test_from_file' do
   end
 
   it 'should grant access to questions' do
-    expect(@test[1]).to be_a(Question)
-    expect(@test[1].read_question).to include "Некоторые улитки являются горами. Все горы любят кошек. Следовательно, все улитки любят кошек"
+    expect(@test[1].read_question).to eq"Некоторые улитки являются горами. Все горы любят кошек. Следовательно, все улитки любят кошек\n1) правильно\n2) не правильно"
   end
 end

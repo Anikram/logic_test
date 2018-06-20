@@ -11,8 +11,7 @@ class Question
   end
 
   def read_question
-    puts @question
-    puts @answers
+    @question + @answers.join("\n")
   end
 
   def get_answer_indexes
