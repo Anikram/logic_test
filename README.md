@@ -7,7 +7,7 @@
 ## Как поиграть
 1. Клонировать репозиторий `git clone git@github.com:Anikram/logic_test.git`
 
-2. Запустить программу коммандой `ruby logic_test.rb` и наслождаться.
+2. Запустить программу коммандой `ruby logic_test.rb` и наслаждаться.
 
 ## Контакты
 По всем вопросам обращаться к [Anikram](github.com/Anikram)
