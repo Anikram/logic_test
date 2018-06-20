@@ -6,6 +6,14 @@ class Question
   end
 
   def check(answer)
+    right_answers_pointers = convert_to_array_of_pointers(@right_answer)
+    answer = convert_to_array_of_pointers(answer)
+
+    answer.each do |pointer|
+      unless right_answers_pointers.include?(pointer)
+        return nil
+      end
+    end
 
   end
 
@@ -26,27 +34,10 @@ class Question
     user_answer
   end
 
-  def get_answer_pointers
-    answers_pointers = []
-
-    @answers.each do |item|
-      answers_pointers << item.to_i
-    end
-
-    answers_pointers
-  end
-
   def validate_answer(input)
-    answers_pointers = get_answer_pointers
-    input_pointers = []
+    answers_pointers = convert_to_array_of_pointers(@answers)
 
-    begin
-      input.each do |i|
-        input_pointers << i.to_i
-      end
-    rescue
-      input_pointers << input.to_i
-    end
+    input_pointers = convert_to_array_of_pointers(input)
 
     input_pointers.each do |pointer|
       unless answers_pointers.include?(pointer)
@@ -55,6 +46,20 @@ class Question
     end
 
     input
+  end
+
+  def convert_to_array_of_pointers(item)
+    result = []
+
+    begin
+      item.each do |i|
+        result << i.to_i
+      end
+    rescue
+      result << item.to_i
+    end
+
+    result
   end
 end
 

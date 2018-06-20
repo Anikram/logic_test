@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../test_builder.rb'
+require_relative '../lib/test_builder.rb'
 
 describe '#load_test_from_file' do
 
