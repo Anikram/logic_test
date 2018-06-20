@@ -10,4 +10,4 @@
 2. Запустить программу коммандой `ruby logic_test.rb` и наслождаться.
 
 ## Контакты
-По всем вопросам обращаться к (Anikram)[github.com/Anikram]
+По всем вопросам обращаться к [Anikram](github.com/Anikram)

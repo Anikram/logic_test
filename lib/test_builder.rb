@@ -7,25 +7,25 @@ class TestBuilder
 
   def self.load_test_from_file(path)
 
-    data = YAML.load(File.read(path))
+    data = YAML.load(File.read(path)) #YAML парсинг
 
-    questions = data["questions"]
+    questions = data["questions"] #парсинг файла по категориям
     answers = data["answers"]
     right_answers = data["right_answers"]
     results = data["results"]
     introduction = data["introduction"]
     test_instance = {}
 
-    questions.count.times do |i|
+    questions.count.times do |i| #создаем фопросы для теста
       i = i+1
       test_instance[i] = Question.new(questions[i], right_answers[i], answers[i])
     end
 
-    test_instance[:results] = results
+    test_instance[:results] = results #дополняем технические параметры для теста
     test_instance[:introduction] = introduction
     test_instance[:score] = 0
 
-    test_instance
+    test_instance # возвращаем собранный Хеш со всеми данными для теста
   end
 
   def self.get_the_result(test)
@@ -43,7 +43,6 @@ class TestBuilder
   else
     test_result << results["excelent"]
   end
-  puts test_result
+    test_result
   end
 end
-#test = TestBuilder.load_test_from_file("data/logic_test.yml")

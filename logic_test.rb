@@ -3,11 +3,11 @@ require_relative 'lib/test_builder.rb'
 
 test = TestBuilder.load_test_from_file("data/logic_test.yml")
 
-
 12.times do |i|
-  i += 1
+  i += 1 #компенсатор индекса ( 0 -> 1 )
+
   puts "#{i}. #{test[i].read_question}"
-  puts "Ваш ответ:"
+  puts 'Ваш ответ:'
 
   input = test[i].get_user_input #Получение ввода и его валидация
 
@@ -16,15 +16,4 @@ test = TestBuilder.load_test_from_file("data/logic_test.yml")
   end
 end
 
-TestBuilder.get_the_result(test)
-
-
-
-
-
-
-
-
-
-
-
+puts TestBuilder.get_the_result(test) #вывод результатов

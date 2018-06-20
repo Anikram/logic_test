@@ -5,7 +5,7 @@ class Question
     @right_answer = right_answer
   end
 
-  def check(answer)
+  def check(answer) #проверка основного правила
     right_answers_pointers = convert_to_array_of_pointers(@right_answer)
     answer = convert_to_array_of_pointers(answer)
 
@@ -17,24 +17,27 @@ class Question
 
   end
 
-  def read_question
+  def read_question # вернуть текст вопроса
     @question + @answers.join("\n")
   end
 
-  def get_user_input
-    user_answer = nil
+  private #служебные методы
 
-    until user_answer do
-      user_input = STDIN.gets.chomp
-      user_input.split(",")
-      user_answer = validate_answer(user_input)
-      puts "Введите ответы, которые считаете правильными через запятую:" unless user_answer
+    def convert_to_array_of_pointers(item) # преобразование любового массива ответов в массив с номерами ответов
+      result = []
+
+      begin
+        item.each do |i|
+          result << i.to_i
+        end
+      rescue NoMethodError
+        result << item.to_i
+      end
+
+      result
     end
 
-    user_answer
-  end
-
-  def validate_answer(input)
+  def validate_answer(input) # валидация - ответ должен быть из предложенных вариантов ответов
     answers_pointers = convert_to_array_of_pointers(@answers)
 
     input_pointers = convert_to_array_of_pointers(input)
@@ -48,18 +51,17 @@ class Question
     input
   end
 
-  def convert_to_array_of_pointers(item)
-    result = []
+  def get_user_input # получения информации от пользователя
+    user_answer = nil
 
-    begin
-      item.each do |i|
-        result << i.to_i
-      end
-    rescue
-      result << item.to_i
+    until user_answer do
+      user_input = STDIN.gets.chomp
+      user_input.split(",")
+      user_answer = validate_answer(user_input)
+      puts "Введите ответы, которые считаете правильными через запятую:" unless user_answer
     end
 
-    result
+    user_answer
   end
 end
 
