@@ -1,11 +1,14 @@
 class Question
+  attr_reader :status
+
   def initialize(question,right_answer,answers)
     @question = question
     @answers = answers
     @right_answer = right_answer
+    @status = :unanswered
   end
 
-  def check(answer) #проверка основного правила
+  def evaluate_answer(answer) #проверка основного правила
     right_answers_pointers = convert_to_array_of_pointers(@right_answer)
     answer = convert_to_array_of_pointers(answer)
 
@@ -13,6 +16,7 @@ class Question
       unless right_answers_pointers.include?(pointer)
         return nil
       end
+      true
     end
 
   end
@@ -21,21 +25,20 @@ class Question
     @question + @answers.join("\n")
   end
 
-  private #служебные методы
 
-    def convert_to_array_of_pointers(item) # преобразование любового массива ответов в массив с номерами ответов
-      result = []
+  def convert_to_array_of_pointers(item) # преобразование любового массива ответов в массив с номерами ответов
+    result = []
 
-      begin
-        item.each do |i|
-          result << i.to_i
-        end
-      rescue NoMethodError
-        result << item.to_i
+    begin
+      item.each do |i|
+        result << i.to_i
       end
-
-      result
+    rescue NoMethodError
+      result << item.to_i
     end
+
+    result
+  end
 
   def validate_answer(input) # валидация - ответ должен быть из предложенных вариантов ответов
     answers_pointers = convert_to_array_of_pointers(@answers)
@@ -47,21 +50,8 @@ class Question
         return nil
       end
     end
+    @status = :answered
 
     input
   end
-
-  def get_user_input # получения информации от пользователя
-    user_answer = nil
-
-    until user_answer do
-      user_input = STDIN.gets.chomp
-      user_input.split(",")
-      user_answer = validate_answer(user_input)
-      puts "Введите ответы, которые считаете правильными через запятую:" unless user_answer
-    end
-
-    user_answer
-  end
 end
-
